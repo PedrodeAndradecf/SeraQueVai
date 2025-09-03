@@ -1,55 +1,66 @@
 import Foundation
 
-// Criar classe Carro
-// criar atributos: marca e modelo
-// Criar construtor
-//Criar metodos acelerar() ,  frear() -> Esses metodos devem exibir "o carro esta acelerando/freando"
+
+class Cofre{
+    private var saldo: Double
+    private var senha: Int
+    // id
+    // email
+    // nome
+    
 
 
-class Carro{
-    private(set) var marca: String
-    private(set) var modelo: String
+    init(senha: Int){
+        self.saldo = 0
+        self.senha = senha
 
 
-
-    init(marca: String, modelo: String){
-        self.marca = marca
-        self.modelo = modelo
     }
 
-    public func acelerar(){
-        print("O carro está acelerando")
+    func checarSaldo(){
+        if self.saldo < 0 {
+            print("Sua conta está negativada")
+        }
+    }
+
+    func depositar(valor: Double){
+        if valor < 0{
+            print("Impossivel depositar este valor")
+        }else{
+            self.saldo += valor
+        }
+        
     }
 
 
-    public func frear(){
-        print("O carro está freando")
+    func sacar(valor: Double){
+        if valor > 0 && valor < self.saldo{
+            saldo -= valor
+        }
+        else if valor < 0 && valor > saldo{
+            print("Hoje nao tem breja")
+        }
+
+        print("Foi sacado um valor de \(valor) reais da sua conta")
     }
 
-    public func getMarca() -> String{
-        return self.marca
+    public func getSaldo() -> Double {
+        return saldo
     }
 
-    private func setMarca(marca: String){
-        self.marca = marca
+    private func setSaldo(valor: Double){
+        self.saldo = valor
     }
 
-    public func alterMarca(senha: Int, novaMarca: String){
-        if senha == 123{
-            self.setMarca(marca: novaMarca)
+    public func alterarSaldo(senhao: Int, novoSaldo: Double){
+        if senha == self.senha{
+            self.setSaldo(valor: novoSaldo)
         }
     }
 
 
 }
 
+let meuCofre = Cofre(senha: 123)
 
-
-let carro = Carro(marca: "Ford", modelo: "Focus")
-
-
-print()
-
-carro.alterMarca(senha: 123, novaMarca: "Volkswagen")
-
-print(carro.getMarca())
+meuCofre.getSaldo()
